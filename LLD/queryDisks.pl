@@ -28,8 +28,7 @@ if ( ! -e $_proc)
 my $_first = 1;
 
 # Present the data in JSON format
-print "{\n";
-print "\t\"data\":[\n\n";
+print "{ \"data\":[\n";
 
 # Fetch the data and put it in an array
 my @_data = `cat $_proc | awk '{ print \$3 }'`;
@@ -39,13 +38,10 @@ chomp @_data;
 foreach my $_disk (@_data)
 {
 	# Print the data in JSON	
-	print "\t,\n" if not $_first;
+	print ",\n" if not $_first;
 	$_first = 0;
 
-	print "\t{\n";
-	print "\t\t\"{#DISK}\":\"$_disk\"\n";
-	print "\n\t}\n";
+	print "\t{ \"{#DISK}\":\"$_disk\" }";
 }
 
-print "\n\t]\n";
-print "}\n";
+print "\n]}\n";
